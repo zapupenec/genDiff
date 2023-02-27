@@ -1,0 +1,28 @@
+{
+  "name": "@hexlet/code",
+  "version": "1.0.0",
+  "description": "«Difference calculator» is a program that determines the difference between two data structures.",
+  "main": "index.js",
+  "type": "module",
+  "dependencies": {
+    "commander": "^10.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.35.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zapupenec/frontend-project-46.git"
+  },
+  "author": "zapupenec",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zapupenec/frontend-project-46/issues"
+  },
+  "homepage": "https://github.com/zapupenec/frontend-project-46#readme"
+}
