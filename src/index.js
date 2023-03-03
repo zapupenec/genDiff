@@ -1,33 +1,6 @@
-import fs from 'fs';
 import _ from 'lodash';
-import path from 'path';
-
-const isCorrectExtension = (filepath) => {
-  const extname = path.extname(filepath);
-  if (extname === '.json' || extname === '.yml' || extname === '.yaml') {
-    return true;
-  }
-  return false;
-};
-
-const genMessageIncorrectExtension = (filepath1, filepath2) => {
-  let preposition = 'or';
-  if (!isCorrectExtension(filepath1) && !isCorrectExtension(filepath1)) {
-    preposition = 'and';
-  }
-
-  const filename1 = path.basename(filepath1);
-  const filename2 = path.basename(filepath2);
-
-  const message = `The file '${filename1}' ${preposition} '${filename2}' with incorrect extension. Use .json or .yml(.yaml) file.`;
-  return message;
-};
-
-const parse = (filepath) => {
-  const absFilepath = path.resolve(filepath);
-  const result = fs.readFileSync(absFilepath, 'utf8');
-  return JSON.parse(result);
-};
+import { isCorrectExtension, genMessageIncorrectExtension } from './incorrectInput.js';
+import parse from './parsers.js';
 
 const compare = (data1, data2) => {
   const keys1 = Object.keys(data1);
@@ -84,4 +57,4 @@ const genDiff = (filepath1, filepath2) => {
   return `{\n${lines}\n}`;
 };
 
-export { genMessageIncorrectExtension, genDiff };
+export default genDiff;

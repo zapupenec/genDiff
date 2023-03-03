@@ -6,4 +6,9 @@
 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/4828c4671187635c3443/test_coverage)](https://codeclimate.com/github/zapupenec/frontend-project-46/test_coverage)
 
-3 шаг) Добавить аскинему с примером работы.
+3 шаг) Добавить аскинему с примером работы. 
+gendiff __fixtures__/file1.json __fixtures__/file2.json
+
+5 шаг) Добавить аскинему с примером работы.
+gendiff __fixtures__/file1.yml __fixtures__/file2.yml
+gendiff __fixtures__/file1.yaml __fixtures__/file2.yaml
