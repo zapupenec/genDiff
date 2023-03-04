@@ -12,6 +12,4 @@ const parse = (filepath) => {
   return yaml.load(data);
 };
 
-console.log(parse('__fixtures__/file1.yaml'));
-
 export default parse;

@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { isCorrectExtension, genMessageIncorrectExtension } from './incorrectInput.js';
 import parse from './parsers.js';
+import formater from './formater.js';
 
 const compare = (data1, data2) => {
   const keys1 = Object.keys(data1);
@@ -8,53 +9,40 @@ const compare = (data1, data2) => {
   const keys = _.sortBy(_.union(keys1, keys2));
 
   const result = keys.reduce((acc, key) => {
+    const node = { name: key };
     if (!Object.hasOwn(data1, key)) {
-      acc[key] = 'added';
+      node.status = 'added';
+      node.value = data2[key];
     } else if (!Object.hasOwn(data2, key)) {
-      acc[key] = 'deleted';
+      node.status = 'deleted';
+      node.value = data1[key];
     } else if (data1[key] !== data2[key]) {
-      acc[key] = 'changed';
+      node.status = 'changed';
+      if (_.isObject(data1[key]) && _.isObject(data2[key])) {
+        node.children = compare(data1[key], data2[key]);
+      } else {
+        node.value1 = data1[key];
+        node.value2 = data2[key];
+      }
     } else {
-      acc[key] = 'unchanged';
+      node.status = 'unchanged';
+      node.value = data1[key];
     }
+    acc.push(node);
     return acc;
-  }, {});
+  }, []);
 
   return result;
 };
 
-const genDiff = (filepath1, filepath2) => {
+const genDiff = (filepath1, filepath2, type = 'stylish') => {
   if (!isCorrectExtension(filepath1) || !isCorrectExtension(filepath2)) {
     return genMessageIncorrectExtension(filepath1, filepath2);
   }
-
   const data1 = parse(filepath1);
   const data2 = parse(filepath2);
-
-  const diff = compare(data1, data2);
-  const keys = Object.keys(diff);
-
-  const lines = keys.reduce((acc, key) => {
-    switch (diff[key]) {
-      case 'added':
-        acc.push(`  + ${key}: ${data2[key]}`);
-        break;
-      case 'deleted':
-        acc.push(`  - ${key}: ${data1[key]}`);
-        break;
-      case 'changed':
-        acc.push(`  - ${key}: ${data1[key]}`);
-        acc.push(`  + ${key}: ${data2[key]}`);
-        break;
-      case 'unchanged':
-        acc.push(`    ${key}: ${data1[key]}`);
-        break;
-      default:
-    }
-    return acc;
-  }, []).join('\n');
-
-  return `{\n${lines}\n}`;
+  const comparison = compare(data1, data2);
+  return formater(comparison, type);
 };
 
 export default genDiff;
