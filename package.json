@@ -1,6 +1,6 @@
 {
   "name": "@hexlet/code",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "«Difference calculator» is a program that determines the difference between two data structures.",
   "main": "index.js",
   "type": "module",
