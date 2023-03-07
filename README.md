@@ -1,25 +1,67 @@
 [![Actions Status](https://github.com/zapupenec/frontend-project-46/workflows/hexlet-check/badge.svg)](https://github.com/zapupenec/frontend-project-46/actions)
-
 [![CI](https://github.com/zapupenec/frontend-project-46/actions/workflows/mainCI.yml/badge.svg)](https://github.com/zapupenec/frontend-project-46/actions/workflows/mainCI.yml)
-
 [![Maintainability](https://api.codeclimate.com/v1/badges/4828c4671187635c3443/maintainability)](https://codeclimate.com/github/zapupenec/frontend-project-46/maintainability)
-
 [![Test Coverage](https://api.codeclimate.com/v1/badges/4828c4671187635c3443/test_coverage)](https://codeclimate.com/github/zapupenec/frontend-project-46/test_coverage)
 
-3 шаг) Добавить аскинему с примером работы (плоские файлы).
+# «Вычислитель отличий»
+«Вычислитель отличий» – CLI утилита, определяющая разницу между двумя структурами данных.
 
-gendiff __fixtures__/file1.json __fixtures__/file2.json
+Возможности утилиты:
+- Поддержка разных входных форматов: yaml, json.
+- Генерация отчета в виде plain text, stylish и json.
 
-5 шаг) Добавить аскинему с примером работы (плоские файлы).
+***
 
-gendiff __fixtures__/file1.yml __fixtures__/file2.yml
+## Установка
+Убедитесь, что у вас установлена Node.js версии 14 и выше.
+```
+node --version
+```
+Скопируйте репозиторий локально и установите зависимости.
+```
+make install
+```
+## Синтаксис
+```
+gendiff [options] <filepath1> <filepath2>
+```
+В качестве аргументов `<filepath1>` и `<filepath2>` используйте пути к первому и второму файлам соответсвенно.
 
-gendiff __fixtures__/file1.yaml __fixtures__/file2.yaml
+Утилита работает только с расширениям **.json**, **.yaml** и **.yaml**
 
-6 шаг) Добавьте в ридми аскинему с примером работы пакета
+## Опции
+Для вывода подсказки используйте `-h` или `--help`.
+```
+gendiff --help
+```
+Чтобы задать формат вывода, используйте `-f` или `--format` с арументом `<type>`.
 
-gendiff __fixtures__/file1.json __fixtures__/file2.yml (рекурсивное сравнение)
+В качестве `<type>` используйте `plain`, `stylish` или `json`.
 
-7 шаг) Добавьте в ридми аскинему с примером работы пакета
+Если не задавать формат, по умолчанию используется `stylish`.
 
-gendiff -f plain __fixtures__/file1.json __fixtures__/file2.yml (рекурсивное сравнение)
+***
+
+## Примеры работы утилиты
+
+### Генерация отчета plain
+```
+gendiff -f plain file1.json file2.json
+```
+[![asciicast](https://asciinema.org/a/YnLYzgE9iHves1115WOh7aOji.svg)](https://asciinema.org/a/YnLYzgE9iHves1115WOh7aOji)
+
+### Генерация отчета stylish
+```
+gendiff file1.yml file2.yaml
+```
+или
+```
+gendiff -f stylish file1.yml file2.yaml
+```
+[![asciicast](https://asciinema.org/a/wjTrlXwv8t6HgLcBv0hkIbLqi.svg)](https://asciinema.org/a/wjTrlXwv8t6HgLcBv0hkIbLqi)
+
+### Генерация отчета json
+```
+gendiff -f json file1.json file1.yml
+```
+[![asciicast](https://asciinema.org/a/AbVoLYL2gXk2jADY7Zz2XiKzy.svg)](https://asciinema.org/a/AbVoLYL2gXk2jADY7Zz2XiKzy)
