@@ -19,3 +19,7 @@ gendiff __fixtures__/file1.yaml __fixtures__/file2.yaml
 6 шаг) Добавьте в ридми аскинему с примером работы пакета
 
 gendiff __fixtures__/file1.json __fixtures__/file2.yml (рекурсивное сравнение)
+
+7 шаг) Добавьте в ридми аскинему с примером работы пакета
+
+gendiff -f plain __fixtures__/file1.json __fixtures__/file2.yml (рекурсивное сравнение)
