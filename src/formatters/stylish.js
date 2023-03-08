@@ -22,10 +22,10 @@ const stylish = (value, replacer = ' ', spacesCount = 4) => {
         if (node.status === 'added') {
           return `${changedSpace}+ ${node.name}: ${iter(node.value, depth + 1)}`;
         }
-        if (node.status === 'deleted') {
+        if (node.status === 'removed') {
           return `${changedSpace}- ${node.name}: ${iter(node.value, depth + 1)}`;
         }
-        if (node.status === 'changed') {
+        if (node.status === 'updated') {
           if (node.children === undefined) {
             return [
               `${changedSpace}- ${node.name}: ${iter(node.value1, depth + 1)}`,

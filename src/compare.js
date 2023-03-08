@@ -11,10 +11,10 @@ const compare = (data1, data2) => {
       node.status = 'added';
       node.value = data2[key];
     } else if (!Object.hasOwn(data2, key)) {
-      node.status = 'deleted';
+      node.status = 'removed';
       node.value = data1[key];
     } else if (data1[key] !== data2[key]) {
-      node.status = 'changed';
+      node.status = 'updated';
       if (_.isObject(data1[key]) && _.isObject(data2[key])) {
         node.children = compare(data1[key], data2[key]);
       } else {
