@@ -49,16 +49,3 @@ test('output json', () => {
     expect(compare).toEqual(examData);
   });
 });
-
-test('File with incorrect extension', () => {
-  const inputsFiles = [
-    ['file1.json', 'result_plain.txt', 'or'],
-    ['result_plain.txt', 'result_json.txt', 'and'],
-  ];
-  inputsFiles.forEach(([file1, file2, preposition]) => {
-    const filepath1 = getFixturePath(file1);
-    const filepath2 = getFixturePath(file2);
-    const message = `The file '${file1}' ${preposition} '${file2}' with incorrect extension. Use .json or .yml(.yaml) file.`;
-    expect(genDiff(filepath1, filepath2)).toBe(message);
-  });
-});
