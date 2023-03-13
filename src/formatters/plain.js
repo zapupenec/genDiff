@@ -1,8 +1,8 @@
 import _ from 'lodash';
 
-const getDisplayValue = (value) => {
+const stringify = (value) => {
   if (!_.isObject(value)) {
-    return _.isString(value) ? `'${value}'` : value;
+    return _.isString(value) ? `'${value}'` : `${value}`;
   }
   return '[complex value]';
 };
@@ -10,25 +10,23 @@ const getDisplayValue = (value) => {
 const plain = (data) => {
   const iner = (currentValue, nodePath) => currentValue.flatMap((node) => {
     const currentNodePath = [...nodePath, node.name];
-    const displayValue = getDisplayValue(node.value);
+    const displayValue = stringify(node.value);
+    const displayValue1 = stringify(node.value1);
+    const displayValue2 = stringify(node.value2);
+
     const { status } = node;
-
-    if (Object.hasOwn(node, 'children')) {
-      return iner(node.children, currentNodePath);
+    switch (status) {
+      case 'haveChildren':
+        return iner(node.children, currentNodePath);
+      case 'added':
+        return `Property '${currentNodePath.join('.')}' was ${status} with value: ${displayValue}`;
+      case 'removed':
+        return `Property '${currentNodePath.join('.')}' was ${status}`;
+      case 'updated':
+        return `Property '${currentNodePath.join('.')}' was ${status}. From ${displayValue1} to ${displayValue2}`;
+      default:
+        return [];
     }
-
-    if (status === 'added') {
-      return `Property '${currentNodePath.join('.')}' was ${status} with value: ${displayValue}`;
-    }
-    if (status === 'removed') {
-      return `Property '${currentNodePath.join('.')}' was ${status}`;
-    }
-    if (status === 'updated') {
-      const displayValue1 = getDisplayValue(node.value1);
-      const displayValue2 = getDisplayValue(node.value2);
-      return `Property '${currentNodePath.join('.')}' was ${status}. From ${displayValue1} to ${displayValue2}`;
-    }
-    return [];
   });
 
   return iner(data, []).join('\n');

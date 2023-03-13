@@ -2,13 +2,14 @@ import stylish from './stylish.js';
 import plain from './plain.js';
 
 const formater = (data, type) => {
-  if (type === 'plain') {
-    return plain(data);
+  switch (type) {
+    case 'plain':
+      return plain(data);
+    case 'json':
+      return JSON.stringify(data);
+    default:
+      return stylish(data);
   }
-  if (type === 'json') {
-    return JSON.stringify(data);
-  }
-  return stylish(data, ' ', 4);
 };
 
 export default formater;
