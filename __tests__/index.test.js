@@ -9,24 +9,26 @@ const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', 
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8').trimEnd();
 
 test.each([
-  ['json', ''],
-  ['yml', 'stylish'],
-  ['yaml', 'stylish'],
-  ['json', 'plain'],
-  ['yml', 'plain'],
-  ['yaml', 'plain'],
-])('outputs', (extension, typeOutput) => {
-  const typeExam = typeOutput === '' ? 'stylish' : typeOutput;
-  const examData = readFile(`result_${typeExam}.txt`);
-
+  'json',
+  'yml',
+  'yaml',
+])('outputs', (extension) => {
   const filepath1 = getFixturePath(`file1.${extension}`);
   const filepath2 = getFixturePath(`file2.${extension}`);
 
-  const data1 = genDiff(filepath1, filepath2, typeOutput);
-  expect(data1).toEqual(examData);
+  const examDataStylish = readFile('result_stylish.txt');
+  const data1 = genDiff(filepath1, filepath2, 'stylish');
+  expect(data1).toEqual(examDataStylish);
 
-  const data2 = genDiff(filepath1, filepath2, 'json');
-  expect(() => JSON.parse(data2)).not.toThrow();
+  const data2 = genDiff(filepath1, filepath2);
+  expect(data2).toEqual(examDataStylish);
+
+  const examDataPlain = readFile('result_plain.txt');
+  const data3 = genDiff(filepath1, filepath2, 'plain');
+  expect(data3).toEqual(examDataPlain);
+
+  const data4 = genDiff(filepath1, filepath2, 'json');
+  expect(() => JSON.parse(data4)).not.toThrow();
 
   expect(() => genDiff(filepath1, filepath2, 'another')).toThrow();
 });
