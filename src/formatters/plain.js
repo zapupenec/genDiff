@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 const stringify = (value) => {
   if (!_.isObject(value)) {
-    return _.isString(value) ? `'${value}'` : `${value}`;
+    return _.isString(value) ? `'${value}'` : String(value);
   }
   return '[complex value]';
 };
@@ -16,7 +16,7 @@ const plain = (data) => {
 
     const { status } = node;
     switch (status) {
-      case 'haveChildren':
+      case 'hasChildren':
         return iner(node.children, currentNodePath);
       case 'added':
         return `Property '${currentNodePath.join('.')}' was ${status} with value: ${displayValue}`;
@@ -24,8 +24,10 @@ const plain = (data) => {
         return `Property '${currentNodePath.join('.')}' was ${status}`;
       case 'updated':
         return `Property '${currentNodePath.join('.')}' was ${status}. From ${displayValue1} to ${displayValue2}`;
-      default:
+      case 'unchanged':
         return [];
+      default:
+        throw new Error(`Unknown key status: '${status}'!`);
     }
   });
 

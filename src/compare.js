@@ -6,6 +6,14 @@ const compare = (data1, data2) => {
   const keys = _.sortBy(_.union(keys1, keys2));
 
   const result = keys.map((key) => {
+    if (_.isPlainObject(data1[key]) && _.isPlainObject(data2[key])) {
+      return {
+        name: key,
+        status: 'hasChildren',
+        children: compare(data1[key], data2[key]),
+      };
+    }
+
     if (!Object.hasOwn(data1, key)) {
       return {
         name: key,
@@ -22,14 +30,7 @@ const compare = (data1, data2) => {
       };
     }
 
-    if (data1[key] !== data2[key]) {
-      if (_.isObject(data1[key]) && _.isObject(data2[key])) {
-        return {
-          name: key,
-          status: 'haveChildren',
-          children: compare(data1[key], data2[key]),
-        };
-      }
+    if (!_.isEqual(data1[key], data2[key])) {
       return {
         name: key,
         status: 'updated',

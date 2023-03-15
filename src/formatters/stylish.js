@@ -29,7 +29,7 @@ const stylish = (value) => {
     const lines = currentValue
       .map((node) => {
         switch (node.status) {
-          case 'haveChildren':
+          case 'hasChildren':
             return `${space}${node.name}: ${iter(node.children, depth + 1)}`;
           case 'added':
             return `${changedSpace}+ ${node.name}: ${stringify(depth + 1, node.value, replacer, spacesCount)}`;
@@ -40,8 +40,10 @@ const stylish = (value) => {
               `${changedSpace}- ${node.name}: ${stringify(depth + 1, node.value1, replacer, spacesCount)}`,
               `${changedSpace}+ ${node.name}: ${stringify(depth + 1, node.value2, replacer, spacesCount)}`,
             ].join('\n');
-          default:
+          case 'unchanged':
             return `${space}${node.name}: ${stringify(depth + 1, node.value, replacer, spacesCount)}`;
+          default:
+            throw new Error(`Unknown key status: '${node.status}'!`);
         }
       }).join('\n');
     return `{\n${lines}\n${bracketSpace}}`;

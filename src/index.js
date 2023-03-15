@@ -10,15 +10,17 @@ const readFile = (filepath) => {
   return data;
 };
 
+const getFileFormat = (filepath) => path.extname(filepath).slice(1);
+
 const genDiff = (filepath1, filepath2, formatName) => {
   const data1 = readFile(filepath1);
-  const extname1 = path.extname(filepath1);
+  const fileFormat1 = getFileFormat(filepath1);
 
   const data2 = readFile(filepath2);
-  const extname2 = path.extname(filepath2);
+  const fileFormat2 = getFileFormat(filepath2);
 
-  const dataParse1 = parse(data1, extname1);
-  const dataParse2 = parse(data2, extname2);
+  const dataParse1 = parse(data1, fileFormat1);
+  const dataParse2 = parse(data2, fileFormat2);
 
   const comparison = compare(dataParse1, dataParse2);
   return formater(comparison, formatName);
