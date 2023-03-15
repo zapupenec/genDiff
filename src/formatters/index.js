@@ -3,8 +3,6 @@ import plain from './plain.js';
 
 const formater = (data, type) => {
   switch (type) {
-    case '':
-      return stylish(data);
     case 'stylish':
       return stylish(data);
     case 'plain':
