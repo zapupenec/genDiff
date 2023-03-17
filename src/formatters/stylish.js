@@ -1,16 +1,16 @@
 import _ from 'lodash';
 
-const stringify = (startDepth, value, replacer = ' ', spacesCount = 1) => {
+const stringify = (startDepth, value, space) => {
   const iter = (currentValue, depth) => {
     if (!_.isObject(currentValue)) {
       return `${currentValue}`;
     }
-    const space = replacer.repeat(spacesCount * depth);
-    const bracketSpace = replacer.repeat(spacesCount * depth - spacesCount);
+    const inerSpace = space.repeat(depth);
+    const bracketSpace = space.repeat(depth - 1);
 
     const lines = Object
       .entries(currentValue)
-      .map(([key, val]) => `${space}${key}: ${iter(val, depth + 1)}`)
+      .map(([key, val]) => `${inerSpace}${key}: ${iter(val, depth + 1)}`)
       .join('\n');
     return `{\n${lines}\n${bracketSpace}}`;
   };
@@ -20,9 +20,10 @@ const stringify = (startDepth, value, replacer = ' ', spacesCount = 1) => {
 const stylish = (value) => {
   const replacer = ' ';
   const spacesCount = 4;
+  const space = replacer.repeat(spacesCount);
 
   const iter = (currentValue, depth) => {
-    const space = replacer.repeat(spacesCount * depth);
+    const currentSpace = replacer.repeat(spacesCount * depth);
     const changedSpace = replacer.repeat(spacesCount * depth - 2);
     const bracketSpace = replacer.repeat(spacesCount * depth - spacesCount);
 
@@ -30,18 +31,18 @@ const stylish = (value) => {
       .map((node) => {
         switch (node.status) {
           case 'hasChildren':
-            return `${space}${node.name}: ${iter(node.children, depth + 1)}`;
+            return `${currentSpace}${node.name}: ${iter(node.children, depth + 1)}`;
           case 'added':
-            return `${changedSpace}+ ${node.name}: ${stringify(depth + 1, node.value, replacer, spacesCount)}`;
+            return `${changedSpace}+ ${node.name}: ${stringify(depth + 1, node.value, space)}`;
           case 'removed':
-            return `${changedSpace}- ${node.name}: ${stringify(depth + 1, node.value, replacer, spacesCount)}`;
+            return `${changedSpace}- ${node.name}: ${stringify(depth + 1, node.value, space)}`;
           case 'updated':
             return [
-              `${changedSpace}- ${node.name}: ${stringify(depth + 1, node.value1, replacer, spacesCount)}`,
-              `${changedSpace}+ ${node.name}: ${stringify(depth + 1, node.value2, replacer, spacesCount)}`,
+              `${changedSpace}- ${node.name}: ${stringify(depth + 1, node.value1, space)}`,
+              `${changedSpace}+ ${node.name}: ${stringify(depth + 1, node.value2, space)}`,
             ].join('\n');
           case 'unchanged':
-            return `${space}${node.name}: ${stringify(depth + 1, node.value, replacer, spacesCount)}`;
+            return `${currentSpace}${node.name}: ${stringify(depth + 1, node.value, space)}`;
           default:
             throw new Error(`Unknown key status: '${node.status}'!`);
         }
