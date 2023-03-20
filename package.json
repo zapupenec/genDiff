@@ -25,12 +25,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zapupenec/frontend-project-46.git"
+    "url": "git+https://github.com/zapupenec/genDiff.git"
   },
   "author": "zapupenec",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/zapupenec/frontend-project-46/issues"
+    "url": "https://github.com/zapupenec/genDiff/issues"
   },
-  "homepage": "https://github.com/zapupenec/frontend-project-46#readme"
+  "homepage": "https://github.com/zapupenec/genDiff#readme"
 }
