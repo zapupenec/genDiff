@@ -3,72 +3,72 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/4828c4671187635c3443/maintainability)](https://codeclimate.com/github/zapupenec/frontend-project-46/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/4828c4671187635c3443/test_coverage)](https://codeclimate.com/github/zapupenec/frontend-project-46/test_coverage)
 
-# «Вычислитель отличий»
-«Вычислитель отличий» – CLI утилита, определяющая разницу между двумя структурами данных.
+EN | [RU](https://github.com/zapupenec/genDiff/blob/main/README-ru.md)
 
-Возможности утилиты:
-- Поддержка разных входных форматов: yaml, json.
-- Генерация отчета в виде plain text, stylish и json.
+# «Difference Calculator»
+«Difference Calculator» is a CLI utility that determines the difference between two data structures.
 
-***
+Features of the utility:
+- Supports different input formats: YAML, JSON.
+- Report generation as **plain**, **stylish** and **JSON**.
 
-## Установка
-Убедитесь, что у вас установлена Node.js версии 14 и выше.
+## Installation
+Make sure you have Node.js version 14 or higher installed.
 ```
 node --version
 ```
-Скопируйте репозиторий локально и установите зависимости.
+Clone the repository locally and install the dependencies.
 ```
 make install
 ```
-Прокект учебный и не опубликован. Установите пакет глобально из локальной директории. Для этого из корневой директории проекта запустите команду:
+The project is a tutorial and has not been published. Install the package globally from the local directory. From the project root directory, run the command:
 ```
 npm link
 ```
-Возможно потребуется использовать `sudo`
+You may need to use `sudo `
 ```
 sudo npm link
 ```
-## Синтаксис
+## Syntax
 ```
 gendiff [options] <filepath1> <filepath2>
 ```
-В качестве аргументов `<filepath1>` и `<filepath2>` используйте пути к первому и второму файлам соответсвенно.
+Use arguments `<filepath1>` and `<filepath2>` as to the first and second file paths.
 
-Утилита работает только с расширениям **.json**, **.yaml** и **.yaml**
+The utility works only with **.json**, **.yaml** and **.yaml** extensions.
 
-## Опции
-Для вывода подсказки используйте `-h` или `--help`.
+## Options
+Use `-h` or `--help` to display a hint.
 ```
 gendiff --help
 ```
-Чтобы задать формат вывода, используйте `-f` или `--format` с арументом `<type>`.
+Use `-f` or `---format` with the argument `<type>` to set the output format
 
-В качестве `<type>` используйте `plain`, `stylish` или `json`.
+Use `plain`, `stylish` or `json` as `<type>`.
 
-Если не задавать формат, по умолчанию используется `stylish`.
+If you don't specify a format, the default is `stylish`.
 
 ***
 
-## Примеры работы утилиты
+## Examples
 
-### Генерация отчета plain
+### Generating a **plain** report
 ```
 gendiff -f plain file1.json file2.json
 ```
 [![asciicast](https://asciinema.org/a/YnLYzgE9iHves1115WOh7aOji.svg)](https://asciinema.org/a/YnLYzgE9iHves1115WOh7aOji)
 
-### Генерация отчета stylish
+### Generating a **stylish** report
 ```
 gendiff file1.yml file2.yaml
 ```
-или
+or
 ```
 gendiff -f stylish file1.yml file2.yaml
 ```
 [![asciicast](https://asciinema.org/a/wjTrlXwv8t6HgLcBv0hkIbLqi.svg)](https://asciinema.org/a/wjTrlXwv8t6HgLcBv0hkIbLqi)
 
-### Генерация отчета json
+### Generating a **json** report
 ```
 gendiff -f json file1.json file1.yml
 ```
