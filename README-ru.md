@@ -1,7 +1,7 @@
-[![Actions Status](https://github.com/zapupenec/frontend-project-46/workflows/hexlet-check/badge.svg)](https://github.com/zapupenec/frontend-project-46/actions)
-[![CI](https://github.com/zapupenec/frontend-project-46/actions/workflows/mainCI.yml/badge.svg)](https://github.com/zapupenec/frontend-project-46/actions/workflows/mainCI.yml)
-[![Maintainability](https://api.codeclimate.com/v1/badges/4828c4671187635c3443/maintainability)](https://codeclimate.com/github/zapupenec/frontend-project-46/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/4828c4671187635c3443/test_coverage)](https://codeclimate.com/github/zapupenec/frontend-project-46/test_coverage)
+[![Actions Status](https://github.com/zapupenec/genDiff/workflows/hexlet-check/badge.svg)](https://github.com/zapupenec/genDiff/actions)
+[![CI](https://github.com/zapupenec/genDiff/actions/workflows/mainCI.yml/badge.svg)](https://github.com/zapupenec/genDiff/actions/workflows/mainCI.yml)
+[![Maintainability](https://api.codeclimate.com/v1/badges/d03279a4a72509537067/maintainability)](https://codeclimate.com/github/zapupenec/genDiff/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/d03279a4a72509537067/test_coverage)](https://codeclimate.com/github/zapupenec/genDiff/test_coverage)
 
 [EN](https://github.com/zapupenec/genDiff) | RU
 
